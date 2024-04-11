@@ -16,6 +16,7 @@ import { DeleteOutline, EditNoteOutlined } from '@mui/icons-material';
 import DeleteCustomerAlert from '../CustomerDeleteAlert/DeleteCustomerAlert';
 import MsgAlert from '../MsgAlert/MsgAlert';
 import EditCustomer from '../EditCustomer/EditCustomer';
+import AddCustomer from '../AddCustomer/AddCustomer';
 
 interface Column {
   id: 'firstname' | 'lastname' | 'email' | 'phone' | 'actions' | '';
@@ -106,7 +107,7 @@ export default function CustomerList() {
     :
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <Typography gutterBottom variant="h5" component="div" sx={{ padding: 2,display:'flex',justifyContent:'space-between' }}>
-        Customers List 
+        Customers List <AddCustomer/>
       </Typography> 
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">

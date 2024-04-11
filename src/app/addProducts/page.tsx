@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/store/store';
 import { addProduct } from '@/redux/slice/product-slice';
-import ProductAddMsg from '../components/ProductAddMsg/ProductAddMsg';
 import Navbar from '../components/Navbar/Navbar';
+import MsgAlert from '../components/MsgAlert/MsgAlert';
 
 
 
@@ -91,7 +91,7 @@ const AddProductPage = () => {
           </Paper>
         </Grid>
         {productAddMsg && (
-                  <ProductAddMsg productAddMsg={productAddMsg}/>
+                  <MsgAlert DeleteMsg={productAddMsg} msg={'Product added successfully'}/>
               )}
       </Grid>
       </Grid>

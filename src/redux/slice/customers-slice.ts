@@ -44,13 +44,33 @@ const initialState:CustomerState = {
         phone: string;
       }
     export const editCustomer = createAsyncThunk(
-        'products/editCustomer',
+        'customers/editCustomer',
         async ({ id, Fname, Sname, email, phone }: EditCustomerPayload, thunkAPI) => {
           try {
             const response = await CustomerServices.editCustomer(id, Fname, Sname, email, phone);
             return response;
           } catch (error) {
             console.error('Error !!', error);
+            // Throwing the error here will automatically reject the action
+            throw error;
+          }
+        }
+      );
+
+      interface AddCustomerPayload {
+        fName: string;
+        lName: string;
+        email:string;
+        phone:string;
+      }
+      export const addCustomer = createAsyncThunk(
+        'customers/addCustomer',
+        async ({fName, lName, email, phone }: AddCustomerPayload, thunkAPI) => {
+          try {
+            const response = await CustomerServices.addNewCustomer(fName, lName, email, phone);
+            return response;
+          } catch (error) {
+            console.error('Error occured, adding product:', error);
             // Throwing the error here will automatically reject the action
             throw error;
           }
@@ -97,6 +117,10 @@ const initialState:CustomerState = {
         })
         builder.addCase(editCustomer.rejected, (state, action) => {
             state.isLoading = false;
+            state.error = action.error.message;
+        })
+        //addCustomer
+        builder.addCase(addCustomer.rejected, (state, action) => {
             state.error = action.error.message;
         })
     },

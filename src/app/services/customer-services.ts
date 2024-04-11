@@ -42,4 +42,23 @@ export class CustomerServices{
           console.error('Error editing product:', error);
         }
       }
+
+      static addNewCustomer = async (firstname:string, lastname:string, email:string, phone:string) => {
+        try {
+          const response = await fetch(`${URL}/customers`, {
+            method: 'POST',
+            headers: header,
+            body: JSON.stringify({
+                firstname,
+                lastname,
+                email,
+                phone
+            }),
+          });
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          console.error('Error !!:', error);
+        }
+      }
 }

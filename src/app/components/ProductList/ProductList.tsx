@@ -16,9 +16,8 @@ import { fetchProducts } from '@/redux/slice/product-slice';
 import { DeleteOutline, EditNoteOutlined } from '@mui/icons-material';
 import Image from 'next/image';
 import DeleteAlert from '../DeleteAlert/DeleteAlert';
-import ProductDeleteMsg from '../ProductDeleteMsg/ProductDeleteMsg';
 import EditProduct from '../EditProduct/EditProduct';
-import ProductEditedMsg from '../ProductEditedMsg/ProductEditedMsg';
+import MsgAlert from '../MsgAlert/MsgAlert';
 
 interface Column {
   id: 'name' | 'price' | 'image' | 'id'|'description' |'actions';
@@ -170,10 +169,10 @@ export default function ProductList() {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
       {
-        prodDeleteMsg && (<ProductDeleteMsg prodDeleteMsg={prodDeleteMsg}/>)
+        prodDeleteMsg && (<MsgAlert DeleteMsg={prodDeleteMsg} msg={'Product deleted successfully'}/>)
       }
       {
-        prodEditedMsg && (<ProductEditedMsg prodEditedMsg={prodEditedMsg}/>)
+        prodEditedMsg && (<MsgAlert DeleteMsg={prodEditedMsg} msg={'Product Edited successfully'}/>)
       }
     </Paper>
     }

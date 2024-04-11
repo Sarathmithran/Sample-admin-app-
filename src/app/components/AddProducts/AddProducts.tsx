@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 const AddProducts = () => {
 
-    const router = useRouter();
+  const router = useRouter();
 
   return (
     <>
