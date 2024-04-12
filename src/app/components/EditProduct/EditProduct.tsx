@@ -36,7 +36,7 @@ const EditProduct = (props:any) => {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Edit Product</DialogTitle>
+        <DialogTitle>Update Product</DialogTitle>
         <DialogContent>
           <TextField
             label="Title"

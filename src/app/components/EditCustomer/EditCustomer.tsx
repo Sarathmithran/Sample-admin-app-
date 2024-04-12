@@ -36,7 +36,7 @@ const EditCustomer = (props:any) => {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Edit Product</DialogTitle>
+        <DialogTitle>Update Customer</DialogTitle>
         <DialogContent>
           <TextField
             label="First Name"

@@ -8,50 +8,35 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { fetchCustomers } from '@/redux/slice/customers-slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store/store';
-import { Box, Button, Skeleton, Tooltip, Typography } from '@mui/material';
+import { Box, Skeleton, Tooltip, Typography } from '@mui/material';
 import { DeleteOutline, EditNoteOutlined } from '@mui/icons-material';
 import DeleteCustomerAlert from '../CustomerDeleteAlert/DeleteCustomerAlert';
 import MsgAlert from '../MsgAlert/MsgAlert';
 import EditCustomer from '../EditCustomer/EditCustomer';
 import AddCustomer from '../AddCustomer/AddCustomer';
+import Link from 'next/link';
 
 interface Column {
-  id: 'firstname' | 'lastname' | 'email' | 'phone' | 'actions' | '';
+  id: 'firstname' | 'lastname' | 'email' | 'phone' | 'actions' | 'orderDetails';
   label: string;
   minWidth?: number;
-  align?: 'right';
+  align?: 'center';
   format?: (value: number) => string;
 }
 
 const columns: readonly Column[] = [
-  { id: 'firstname', label: 'First Name', minWidth: 120 },
-  { id: 'lastname', label: 'Last Name', minWidth: 120 },
-  {id: 'email', label: 'Email', minWidth: 100},
-  {id: 'phone', label: 'Phone', minWidth: 100},
-  {id: 'actions', label: 'Action', minWidth: 100},
-  {id: '', label: '', minWidth: 100}
+  { id: 'firstname', label: 'First Name', minWidth: 120, align:'center'},
+  { id: 'lastname', label: 'Last Name', minWidth: 120, align:'center' },
+  {id: 'email', label: 'Email', minWidth: 100, align:'center'},
+  {id: 'phone', label: 'Phone', minWidth: 100, align:'center'},
+  {id: 'actions', label: 'Action', minWidth: 100, align:'center'},
+  { id: 'orderDetails', label: 'Order Details', minWidth: 100, align:'center'}
 ];
 
-interface Data {
-  name: string;
-  code: string;
-  population: number;
-  size: number;
-  density: number;
-}
-
-function createData(
-  name: string,
-  code: string,
-  population: number,
-  size: number,
-): Data {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
 
 
 export default function CustomerList() {
@@ -133,10 +118,10 @@ export default function CustomerList() {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column.id} align={column.align} sx={{textAlign:'center'}}>
                             {column.format ? column.format(value) : value}
                             {column.id === 'actions' && <><Tooltip title="Delete"><DeleteOutline onClick={() => {setDeleteCustomer(true),setDeleteCustomerId(row.id)}} style={{ cursor: 'pointer' }} /></Tooltip> <Tooltip title="Update"><EditNoteOutlined onClick={() => {setEditCustomer(true), setDeleteCustomerId(row.id)}}  style={{ cursor: 'pointer' }} /></Tooltip></>}
-                            {column.id === '' && <Button variant='contained'>Orders</Button>}
+                            {column.id === 'orderDetails' && <Link href={'/customers/'+row?.id}><ArrowForwardIosIcon fontSize='small' color='primary'/></Link>}
                         </TableCell>
                     );
                     })}
