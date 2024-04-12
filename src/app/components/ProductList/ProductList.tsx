@@ -9,7 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import AddProducts from '../AddProducts/AddProducts';
-import { Box, Skeleton, Tooltip, Typography } from '@mui/material';
+import { Tooltip, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store/store';
 import { fetchProducts } from '@/redux/slice/product-slice';
@@ -18,6 +18,7 @@ import Image from 'next/image';
 import DeleteAlert from '../DeleteAlert/DeleteAlert';
 import EditProduct from '../EditProduct/EditProduct';
 import MsgAlert from '../MsgAlert/MsgAlert';
+import LoadingSkeleton from '../LoadingSkelton/LoadingSkeleton';
 
 interface Column {
   id: 'name' | 'price' | 'image' | 'id'|'description' |'actions';
@@ -36,23 +37,6 @@ const columns: readonly Column[] = [
   { id: 'actions', label: 'Actions', minWidth: 100, align: 'center' }
 ];
 
-interface Data {
-  name: string;
-  code: string;
-  population: number;
-  size: number;
-  density: number;
-}
-
-function createData(
-  name: string,
-  code: string,
-  population: number,
-  size: number,
-): Data {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
 
 export default function ProductList() {
 
@@ -98,11 +82,7 @@ export default function ProductList() {
   return (
     <>
     {isLoding ? (
-      <Box sx={{ width: '100%'}}>
-        <Skeleton sx={{ width: '100%', height: '25vh'}}/>
-        <Skeleton animation="wave" sx={{ width: '100%', height: '25vh'}}/>
-        <Skeleton animation={false} sx={{ width: '100%', height: '25vh'}}/>
-      </Box>    
+      <LoadingSkeleton/>   
     )
     :
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -142,7 +122,7 @@ export default function ProductList() {
                             return (
                                 <TableCell key={column.id} align={column.align}>
                                     {column.format ? column.format(value) : value}
-                                    {column.id === 'actions' && <><Tooltip title="Delete"><DeleteOutline onClick={() => {setDeleteProd(true),setDeleteProductId(row.id)}} style={{ cursor: 'pointer' }} /></Tooltip> <Tooltip title="Edit"><EditNoteOutlined onClick={() => {setEditProduct(true),setDeleteProductId(row.id)}} style={{ cursor: 'pointer' }} /></Tooltip></>}
+                                    {column.id === 'actions' && <><Tooltip title="Delete"><DeleteOutline onClick={() => {setDeleteProd(true),setDeleteProductId(row.id)}} style={{ cursor: 'pointer' }} /></Tooltip> <Tooltip title="Update"><EditNoteOutlined onClick={() => {setEditProduct(true),setDeleteProductId(row.id)}} style={{ cursor: 'pointer' }} /></Tooltip></>}
                                 </TableCell>
                             );
                         }
