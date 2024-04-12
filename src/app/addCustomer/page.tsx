@@ -1,5 +1,5 @@
 'use client'
-import { Box, Button, Grid, Paper, TextField, Typography, useTheme } from '@mui/material'
+import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar/Navbar'
 import { useDispatch } from 'react-redux'
@@ -7,6 +7,7 @@ import { AppDispatch } from '@/redux/store/store'
 import { useRouter } from 'next/navigation'
 import { addCustomer } from '@/redux/slice/customers-slice'
 import MsgAlert from '../components/MsgAlert/MsgAlert'
+import BackBtn from '../components/BackBtn/BackBtn'
 
 const AddCustomerPage = () => {
 
@@ -17,7 +18,6 @@ const AddCustomerPage = () => {
   const [customerAddMsg,setCustomerAddMsg] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
-  const theme = useTheme()
 
   const handleAddCustomer = async () => {
     try{
@@ -44,8 +44,7 @@ const AddCustomerPage = () => {
     <Box sx={{ display: 'flex' }}>
       <Navbar/>
       <Box component="main" sx={{ flexGrow: 1, pt: 12,paddingLeft:3,paddingRight:3 }}>
-      <Grid sx={{height:'100vh',backgroundColor:theme.palette.primary.dark}}>
-      <Grid container justifyContent="center" spacing={2} style={{margin:0,paddingTop:30,paddingBottom:30}}>
+        <BackBtn BtnName={'customers'}/>
         <Grid item xs={12} md={6}>
           <Paper elevation={3} style={{ padding: 20 }}>
             <Typography variant="h5" gutterBottom>
@@ -100,8 +99,6 @@ const AddCustomerPage = () => {
         { customerAddMsg && (
                   <MsgAlert DeleteMsg={customerAddMsg} msg={'Customer added successfully'}/>
               )}
-      </Grid>
-      </Grid>
       </Box>
     </Box>
   )

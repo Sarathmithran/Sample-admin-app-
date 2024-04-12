@@ -1,13 +1,13 @@
 'use client'
 import React, { useState } from 'react';
-import { TextField, Button, Grid, Typography, Paper, useTheme, Box } from '@mui/material';
+import { TextField, Button, Grid, Typography, Paper, Box } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/store/store';
 import { addProduct } from '@/redux/slice/product-slice';
 import Navbar from '../components/Navbar/Navbar';
 import MsgAlert from '../components/MsgAlert/MsgAlert';
-
+import BackBtn from '../components/BackBtn/BackBtn';
 
 
 const AddProductPage = () => {
@@ -18,7 +18,6 @@ const AddProductPage = () => {
   const [productAddMsg,setProductAddMsg] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
-  const theme = useTheme()
 
   const handleAddProduct = async () => {
     try{
@@ -45,8 +44,7 @@ const AddProductPage = () => {
     <Box sx={{ display: 'flex' }}>
       <Navbar/>
       <Box component="main" sx={{ flexGrow: 1, pt: 12,paddingLeft:3,paddingRight:3 }}>
-      <Grid sx={{height:'100vh',backgroundColor:theme.palette.primary.dark}}>
-      <Grid container justifyContent="center" spacing={2} style={{margin:0,paddingTop:30,paddingBottom:30}}>
+      <BackBtn BtnName={'products'}/>
         <Grid item xs={12} md={6}>
           <Paper elevation={3} style={{ padding: 20 }}>
             <Typography variant="h5" gutterBottom>
@@ -93,8 +91,6 @@ const AddProductPage = () => {
         {productAddMsg && (
                   <MsgAlert DeleteMsg={productAddMsg} msg={'Product added successfully'}/>
               )}
-      </Grid>
-      </Grid>
       </Box>
     </Box>
   );
