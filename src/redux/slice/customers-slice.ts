@@ -77,6 +77,18 @@ const initialState:CustomerState = {
         }
       );
 
+      export const fetchCustomerOrders = createAsyncThunk(
+        'customers/fetchCustomerOrders',
+        async (id:string,thunkAPI) => {
+            try{
+                const response = await CustomerServices.getCustomerOrders(id);
+                return response;
+            }catch(error){
+                console.log('error !!',error);
+            }
+        }
+    )
+
   export const customerSlice = createSlice({
     name:'customers',
     initialState,
@@ -123,6 +135,18 @@ const initialState:CustomerState = {
         builder.addCase(addCustomer.rejected, (state, action) => {
             state.error = action.error.message;
         })
+        //fetchCustomerOrders
+        builder.addCase(fetchCustomerOrders.pending, (state) => {
+          state.isLoading = true;
+        })
+        builder.addCase(fetchCustomerOrders.fulfilled, (state,action) => {
+            state.order = action.payload;
+            state.isLoading = false;
+        })
+        builder.addCase(fetchCustomerOrders.rejected, (state,action) => {
+          state.error = action.error.message;
+          state.isLoading = false;
+      })
     },
   });
 

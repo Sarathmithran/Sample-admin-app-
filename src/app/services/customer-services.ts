@@ -61,4 +61,17 @@ export class CustomerServices{
           console.error('Error !!:', error);
         }
       }
+
+      static getCustomerOrders = async (id:string) => {
+        try{
+            let orderResponse = await fetch(`${URL}/customers/${id}/orders`, {
+            method: "GET",
+            headers: header,
+            });
+            const data = await orderResponse.json();
+            return data.data;
+        }catch(error){
+            console.log('Something wrong',error);   
+        }
+    }
 }
