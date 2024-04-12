@@ -13,24 +13,23 @@ const AppThemeProvider = ({
         {   
             palette: {
                 primary: {
-                    main: '#00CED1', // Aqua color
+                    main: '#3F51B5', // Indigo color
                 },
                 secondary: {
-                    main: '#9e9e9e', // Grey color
+                    main: '#8BC34A', // Light green color
                 },
                 error: {
-                    main: '#f44336', // Red color
+                    main: '#FF5722', // Deep orange color
                 },
                 background: {
-                    default: '#212121', // Dark background color
-                    paper: '#424242', // Dark grey surface color
+                    default: '#F5F5F5', // Light grey background color
+                    paper: '#FFFFFF', // White surface color
                 },
                 text: {
-                    primary: '#ffffff', // Light text color
-                    secondary: '#B0BEC5', // Light grey text color
+                    primary: '#212121', // Dark text color
+                    secondary: '#757575', // Grey text color
                 },
-            },
-            
+            },                      
             typography : {
                 fontFamily: 'Roboto, sans-serif',
             },
