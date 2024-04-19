@@ -8,5 +8,6 @@ export interface Product {
       formatted: string;
       formatted_with_symbol: string;
       formatted_with_code: string;
-    }
+    },
+    actions:any
 }

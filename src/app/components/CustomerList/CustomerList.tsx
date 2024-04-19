@@ -19,6 +19,7 @@ import MsgAlert from '../MsgAlert/MsgAlert';
 import EditCustomer from '../EditCustomer/EditCustomer';
 import AddCustomer from '../AddCustomer/AddCustomer';
 import Link from 'next/link';
+import { Customer } from '@/modal/customer';
 
 interface Column {
   id: 'firstname' | 'lastname' | 'email' | 'phone' | 'actions' | 'orderDetails';
@@ -112,7 +113,7 @@ export default function CustomerList() {
           <TableBody>
             {customerstData
               ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              ?.map((row) => {
+              ?.map((row:Customer) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                     {columns.map((column) => {

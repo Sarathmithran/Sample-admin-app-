@@ -19,6 +19,7 @@ import DeleteAlert from '../DeleteAlert/DeleteAlert';
 import EditProduct from '../EditProduct/EditProduct';
 import MsgAlert from '../MsgAlert/MsgAlert';
 import LoadingSkeleton from '../LoadingSkelton/LoadingSkeleton';
+import { Product } from '@/modal/products';
 
 interface Column {
   id: 'name' | 'price' | 'image' | 'id'|'description' |'actions';
@@ -61,7 +62,7 @@ export default function ProductList() {
   const producstDeleted = useSelector((state:RootState) => {
     return state.product.productDeleted;
   });
-
+  
   const producstEdited = useSelector((state:RootState) => {
     return state.product.productEdited;
   });
@@ -73,7 +74,7 @@ export default function ProductList() {
   const producstData = useSelector((state:RootState) => {
     return state.product.products;
   })
-
+  console.log(producstData);
   const isLoding = useSelector((state:RootState)=>{
     return state.product.isLoading;
   })
@@ -107,7 +108,7 @@ export default function ProductList() {
           <TableBody>
             {producstData
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((row:Product) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                     {columns.map((column) => {
